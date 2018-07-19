@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <h1>Order #<%= @order.id %></h1>
+  <h4>Thank you for your order!</h4>
+  <p>@order.email</p>
+  <% @total = 0 %>
+  <% @order.line_items.each do |item| %>
+      <% @total += item.quantity %>
+      <h5>Product</h5>
+      <p><%= item.name %></p>
+      <p><%= item.description %></p>
+      <h5>Unit Price</h5>
+      <p><%= item[:item_price_cents]/100 %></p>
+      <h5>Quantity</h5>
+      <p><%= item.quantity %></p>
+      <h5>Price</h5>
+      <p><%= item[:total_price_cents]/100%></
+    <% end %>
+  <h5>TOTAL ITEMS:</h5>
+  <p><%= @total %></p>
+  <h5>TOTAL:</h5>
+  <p><%= @order.total_cents/100 %></p>
+</html>
