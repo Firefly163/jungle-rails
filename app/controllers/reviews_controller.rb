@@ -15,7 +15,6 @@ class ReviewsController < ApplicationController
 
   def destroy
     @product = Product.find(params[:product_id].to_i)
-    p "QQQQQQQQQQQ #{params[:id]}"
     @review = Review.find(params[:id])
     @review.destroy
 
