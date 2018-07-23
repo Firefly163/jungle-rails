@@ -22,9 +22,52 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt>Average Rating</dt>
+          <dd><%= @rating %></dd>
         </dl>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-4">
+        <% if @user %>
+          <h3>Write a Review</h3>
+          <%= form_for [@product, @review] do |f| %>
+            <%= f.text_area :description, class: "form-control", placeholder: "Description: " %><br />
+              Rating: <%= f.select :rating, [1, 2, 3, 4, 5] %>
+            <%= f.submit class: "btn btn-success" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-4">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th colspan="2">Reviews</th>
+            <th>Rating</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @product.reviews.reverse.each do |r| %>
+            <tr>
+              <th><%= r.user.first_name %></th>
+              <td>
+                <p><%= r.description %></p>
+              </td>
+              <td><%= r.rating %></td>
+              <td>
+                <% if @user == r[:user_id] %>
+                  <%= link_to 'Delete', [@product, r], class: 'btn    btn-sm btn-danger' , method: :delete, data: { confirm: "  Are  you sure?" } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
   </article>
 

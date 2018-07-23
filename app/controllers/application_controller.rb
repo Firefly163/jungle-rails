@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def cart
-    # value = cookies[:cart] || JSON.generate({})
+    value = cookies[:cart] || JSON.generate({})
     @cart ||= cookies[:cart].present? ? JSON.parse(cookies[:cart]) : {}
   end
   helper_method :cart
@@ -27,5 +27,10 @@ class ApplicationController < ActionController::Base
   def authorize
     redirect_to '/login' unless current_user
   end
+
+  def logged_in?
+    session[:user_id] != nil
+  end
+
 
 end

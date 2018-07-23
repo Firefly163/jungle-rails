@@ -174,9 +174,4 @@ user2.reviews.create({
   rating: 1
 })
 
-
-
-
-
-
 puts "DONE!"
